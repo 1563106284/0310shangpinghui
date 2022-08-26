@@ -11,4 +11,9 @@ import com.baomidou.mybatisplus.extension.service.IService;
 */
 public interface SkuInfoService extends IService<SkuInfo> {
 
+    void updateState(Long skuId);
+
+    void cancelSale(Long skuId);
+
+    void saveSkuInfoList(SkuInfo skuInfo);
 }

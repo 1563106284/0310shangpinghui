@@ -7,6 +7,8 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * trademark:
  * 品牌接口
@@ -17,6 +19,18 @@ public class BaseTrademarkController {
 
     @Autowired
     BaseTrademarkService baseTrademarkService;
+    /**
+     * 6:获取所有品牌trademark
+     */
+    @GetMapping("/getTrademarkList")
+    public Result getTrademarkList(){
+        List<BaseTrademark> list = baseTrademarkService.list();
+        return Result.ok(list);
+    }
+
+
+
+
     /**
      * 5:删除品牌：
      */

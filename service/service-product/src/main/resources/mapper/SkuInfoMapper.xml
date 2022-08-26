@@ -23,4 +23,13 @@
         tm_id,category3_id,sku_default_img,
         is_sale
     </sql>
+
+<!--    is_sale=0 没有在售-->
+    <update id="updateState0">
+     update sku_info set is_sale=0 where id=#{skuId}
+     </update>
+<!--      is sale=1 为在售上架-->
+    <update id="updateState1">
+    update sku_info set is_sale=1 where id=#{skuId}
+    </update>
 </mapper>

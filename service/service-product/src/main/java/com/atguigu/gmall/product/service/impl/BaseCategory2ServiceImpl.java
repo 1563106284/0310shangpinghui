@@ -2,6 +2,7 @@ package com.atguigu.gmall.product.service.impl;
 
 import com.atguigu.gmall.model.product.BaseCategory1;
 import com.atguigu.gmall.model.product.BaseCategory2;
+import com.atguigu.gmall.model.to.CategoryTreeTo;
 import com.atguigu.gmall.product.mapper.BaseCategory3Mapper;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -26,14 +27,28 @@ public class BaseCategory2ServiceImpl extends ServiceImpl<BaseCategory2Mapper, B
 
      @Autowired
    BaseCategory2Mapper   baseCategory2Mapper;
+    private String c1id;
+
+//    @Override
+//    public List<CategoryTreeTo> getAllCategoryWithTree() {
+//        return null;
+//    }
+
+    /**
+     *
+     * @param c1id
+     * @return
+     */
     @Override
     public List<BaseCategory2> getCategory1Child(String c1id) {
+        this.c1id = c1id;
         QueryWrapper<BaseCategory2> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("category1_id", c1id);
         List<BaseCategory2> list = baseCategory2Mapper.selectList(queryWrapper);
 
         return list;
     }
+
 }
 
 

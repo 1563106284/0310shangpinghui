@@ -12,6 +12,8 @@
     <packaging>pom</packaging>
     <modules>
         <module>service-product</module>
+        <module>web-all</module>
+        <module>service-item</module>
     </modules>
 
     <artifactId>service</artifactId>
@@ -29,9 +31,10 @@
             <version>1.0</version>
         </dependency>
         <!--数据载体-->
+
         <dependency>
-            <groupId>com.atguigu.gmall</groupId>
-            <artifactId>module</artifactId>
+            <groupId> com.atguigu.gmall</groupId>
+            <artifactId>model</artifactId>
             <version>1.0</version>
         </dependency>
 
@@ -88,6 +91,25 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-zipkin</artifactId>
         </dependency>
+
+
+
+
+<!--            &lt;!&ndash;          minio&ndash;&gt;-->
+<!--            <dependency>-->
+<!--                <groupId>io.minio</groupId>-->
+<!--                <artifactId>minio</artifactId>-->
+<!--                <version>7.0.2</version>-->
+<!--            </dependency>-->
+<!--            &lt;!&ndash;          测试：&ndash;&gt;-->
+<!--            <dependency>-->
+<!--                <groupId>org.springframework.boot</groupId>-->
+<!--                <artifactId>spring-boot-starter-test</artifactId>-->
+<!--                <scope>test</scope>-->
+<!--            </dependency>-->
+
+
+
 
     </dependencies>
 

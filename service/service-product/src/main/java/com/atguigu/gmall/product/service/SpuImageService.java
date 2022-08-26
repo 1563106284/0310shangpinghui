@@ -11,4 +11,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
 */
 public interface SpuImageService extends IService<SpuImage> {
 
+//    SpuImage getImageById(Long spuId);
 }

@@ -22,7 +22,22 @@
     <description>service-product</description>
 
 
+    <dependencies>
 
+
+        <dependency>
+        <groupId>io.minio</groupId>
+        <artifactId>minio</artifactId>
+        <version>8.2.0</version>
+
+    </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+        </dependency>
+
+
+    </dependencies>
 
 
 
