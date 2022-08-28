@@ -30,6 +30,18 @@
 <select id="selectSaleList" resultMap="saleList">
 SELECT  n.*,v.`id` vid,v.`sale_attr_value_name`  FROM`spu_sale_attr` n LEFT JOIN `spu_sale_attr_value` v
 ON n.`spu_id`=v.`spu_id` AND n.`base_sale_attr_id`=v.`base_sale_attr_id`
-WHERE n.`spu_id`=#{spuId}
+WHERE n.`spu_id`=#{spuId} order by n.id,v.id
+</select>
+
+<select id="getItemSaleAttrAndValueSku" resultMap="saleList">
+SELECT n.*,v.`sale_attr_value_name`,
+IF(ss.`sale_attr_value_id` IS NULL,'0','1') AS is_check
+FROM `spu_sale_attr` n
+LEFT JOIN `spu_sale_attr_value` v
+ON n.`spu_id`=v.`spu_id` AND n.`base_sale_attr_id`=v.`base_sale_attr_id`
+LEFT JOIN `sku_sale_attr_value` ss
+ON ss.sku_id=#{skuId} AND v.`id`=ss.`sale_attr_value_id`
+WHERE n.spu_id=#{spuId}
+ORDER BY n.`id`,v.`id`
 </select>
 </mapper>

@@ -1,0 +1,22 @@
+server:
+  port: 7000
+
+
+#  排除sql
+spring:
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+      # 配置zipkin链路追踪
+      #原理：web的方式，把每个请求的数据发给链路追踪服务器 zipkin，
+#  zipkin:
+#    base-url: http://192.168.200.100:9411
+#      sender:
+#        type: web
+  thymeleaf:
+      prefix: classpath:/templates/
+      suffix: .html
+  zipkin:
+    base-url: http://192.168.200.100:9411
+    sender:
+      type: web
+

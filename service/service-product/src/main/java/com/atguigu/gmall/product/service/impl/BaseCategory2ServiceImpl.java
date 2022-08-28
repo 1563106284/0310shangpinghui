@@ -26,13 +26,21 @@ public class BaseCategory2ServiceImpl extends ServiceImpl<BaseCategory2Mapper, B
 
 
      @Autowired
-   BaseCategory2Mapper   baseCategory2Mapper;
+    BaseCategory2Mapper   baseCategory2Mapper;
     private String c1id;
 
-//    @Override
-//    public List<CategoryTreeTo> getAllCategoryWithTree() {
-//        return null;
-//    }
+
+
+    /**
+     * 2：查询index：
+     * 首页需要的树形分类数据
+     * @return
+     */
+    @Override
+    public List<CategoryTreeTo> getAllCategoryWithTree() {
+        List<CategoryTreeTo>  list= baseCategory2Mapper.getAllCategoryWithTree();
+        return list;
+    }
 
     /**
      *

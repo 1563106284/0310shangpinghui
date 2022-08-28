@@ -24,7 +24,17 @@ public class SpuSaleAttrServiceImpl extends ServiceImpl<SpuSaleAttrMapper, SpuSa
      @Autowired
      SpuSaleAttrMapper spuSaleAttrMapper;
 
-
+    /**
+     * 2 :查询前端 item页面需要的sale属性
+     * @param spuId
+     * @param skuId
+     * @return
+     */
+    @Override
+    public List<SpuSaleAttr> getItemSaleAttrAndValueSku(Long spuId, Long skuId) {
+        List<SpuSaleAttr>  spuSaleAttrList=spuSaleAttrMapper.getItemSaleAttrAndValueSku(spuId,skuId);
+        return spuSaleAttrList;
+    }
     /**
      * 1：根据spu id查询Sale属性名和值
      * @param spuId
@@ -36,6 +46,7 @@ public class SpuSaleAttrServiceImpl extends ServiceImpl<SpuSaleAttrMapper, SpuSa
 
         return list;
     }
+
 }
 
 

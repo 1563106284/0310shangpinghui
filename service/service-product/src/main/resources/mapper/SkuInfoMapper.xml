@@ -23,6 +23,11 @@
         tm_id,category3_id,sku_default_img,
         is_sale
     </sql>
+<!--查询实时价格-->
+    <select id="selectPrice" resultType="java.math.BigDecimal">
+    select price from sku_info where id=#{skuId}
+    </select>
+
 
 <!--    is_sale=0 没有在售-->
     <update id="updateState0">
@@ -32,4 +37,6 @@
     <update id="updateState1">
     update sku_info set is_sale=1 where id=#{skuId}
     </update>
+
+
 </mapper>

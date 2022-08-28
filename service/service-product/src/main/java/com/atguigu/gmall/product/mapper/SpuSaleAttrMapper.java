@@ -17,6 +17,8 @@ public interface SpuSaleAttrMapper extends BaseMapper<SpuSaleAttr> {
 
 
     List<SpuSaleAttr> selectSaleList(@Param("spuId") Long spuId);
+
+    List<SpuSaleAttr> getItemSaleAttrAndValueSku(@Param("spuId") Long spuId, @Param("skuId") Long skuId);
 }
 
 

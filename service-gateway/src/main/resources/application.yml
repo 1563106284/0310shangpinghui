@@ -13,20 +13,15 @@ spring:
 #      gateway实现同意跨域的配置
 
   cloud:
-
     gateway:
-      routes:
-        - id: product_route
-          uri: lb://service-product  #lb 负载均衡的意思
-          predicates: #断言
-            - Path=/admin/product/**
 
-    #前端页面地址：
-        - id: web_all_route
-          uri: lb://web-all
-          predicates:
-            - Host=**.gmall.com
 
+
+##前端页面地址：
+#         - id: web_all_route
+#          uri: lb://web-all
+#          predicate:
+#            - Path=/admin/product/**
 
       globalcors:
         cors-configurations:
@@ -37,6 +32,18 @@ spring:
             allowedMethods: "*"
             allowedHeaders: "*" # 同意复制跨域请求头中携带
             allowCredentials: true #同意带一些安全标志跨域：比如cookie
+      routes:
+        - id: product_route
+          uri: lb://service-product
+          predicates:
+            - Path=/admin/product/**
+#            -  前端页面
+        - id: web_all_route
+          uri: lb://web_all
+          predicates:
+            - Path=/admin/product/**
+
+
 
 
 
