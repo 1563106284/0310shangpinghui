@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.nio.file.attribute.AttributeView;
-import java.util.List;
+import java.util.*;
 import java.util.function.LongSupplier;
 
 /**
@@ -24,6 +24,8 @@ public class BaseAttrControler {
     BaseAttrInfoService baseAttrInfoService;
     @Autowired
     BaseAttrValueService baseAttrValueService;
+
+
 
     /**
      * 3：修改属性前的回显：

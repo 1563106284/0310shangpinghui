@@ -49,6 +49,12 @@
             <scope>provided</scope>
         </dependency>
 
+<!--        配置文件提示处理器-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+        </dependency>
+
     </dependencies>
 
 </project>

@@ -41,6 +41,33 @@ public class SkuInfoServiceImpl extends ServiceImpl<SkuInfoMapper, SkuInfo>
        SpuSaleAttrService spuSaleAttrService;
 
     /**
+     * 7:大接口优化
+     *   获取sku 图片
+     * @param skuId
+     * @return
+     */
+    @Override
+    public List<SkuImage> getDetailSkuImage(Long skuId) {
+        //4:查询sku 的图片
+        List<SkuImage> images =skuImageService.getImages(skuId);
+
+        return images;
+    }
+    /**
+     * 6；大接口优化：
+     * 1：item info信息
+     * @param skuId
+     * @return
+     */
+    @Override
+    public SkuInfo getDetailSkuInfo(Long skuId) {
+        //1:根据sku id查询出所有skuinfo数据，得到category 3级id
+        SkuInfo skuInfo = skuInfoMapper.selectById(skuId);
+        return skuInfo ;
+    }
+
+
+    /**
      * 5:查询实时价格
      * @param skuId
      * @return
@@ -51,11 +78,13 @@ public class SkuInfoServiceImpl extends ServiceImpl<SkuInfoMapper, SkuInfo>
         return price;
     }
 
+
     /**
-     * 4：查询前端 item页面所有需要的数据
+     * 4：优化前：查询前端 item页面所有需要的数据
      * @param skuId
      * @return
      */
+    @Deprecated
     @Override
     public SkuDetailTo getSkuDetail(Long skuId) {
         SkuDetailTo skuDetailTo = new SkuDetailTo();
@@ -83,6 +112,12 @@ public class SkuInfoServiceImpl extends ServiceImpl<SkuInfoMapper, SkuInfo>
 
         skuDetailTo.setSpuSaleAttrList(saleList);
 
+        //7:sku所有兄弟销售属性名和属性值关系查出来并封装
+
+        Long spuId = skuInfo.getSpuId();
+     String valueJson  =spuSaleAttrService.getAllSkuSaleAttrValueJson(spuId);
+      skuDetailTo.setValuesSkuJson( valueJson );
+
         return skuDetailTo;
     }
 
@@ -102,11 +137,14 @@ public class SkuInfoServiceImpl extends ServiceImpl<SkuInfoMapper, SkuInfo>
         for (SkuAttrValue value : values) {
             value.setSkuId(skuInfo.getId());
 
+
         }
         skuAttrValueService.saveBatch(values);
         //3；保存图片：数据 sku image
         List<SkuImage> skuImageList = skuInfo.getSkuImageList();
-
+        for (SkuImage skuImage : skuImageList) {
+            skuImage.setSkuId(skuInfo.getId());
+        }
         skuImageService.saveBatch(skuImageList);
         //4:保存销售属性
         List<SkuSaleAttrValue> skuSaleAttrValueList = skuInfo.getSkuSaleAttrValueList();

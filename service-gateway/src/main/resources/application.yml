@@ -37,6 +37,12 @@ spring:
           uri: lb://service-product
           predicates:
             - Path=/admin/product/**
+
+#              负载均衡锁的测试配置
+        - id: incr_route
+          uri: lb://service-item
+          predicates:
+            - Path=/**
 #            -  前端页面
         - id: web_all_route
           uri: lb://web_all

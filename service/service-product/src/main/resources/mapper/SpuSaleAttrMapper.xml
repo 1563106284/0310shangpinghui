@@ -21,9 +21,9 @@
 
 <resultMap id="saleList" type="com.atguigu.gmall.model.product.SpuSaleAttr" autoMapping="true">
 <id column="id"  property="id"></id>
-<collection property="spuSaleAttrValueList" ofType="com.atguigu.gmall.model.product.SpuSaleAttrValue">
+<collection property="spuSaleAttrValueList" ofType="com.atguigu.gmall.model.product.SpuSaleAttrValue" autoMapping="true">
 <id column="vid" property="id"></id>
-<result column="sale_attr_value_name" property="saleAttrValueName"></result>
+
 </collection>
 
 </resultMap>
@@ -33,15 +33,50 @@ ON n.`spu_id`=v.`spu_id` AND n.`base_sale_attr_id`=v.`base_sale_attr_id`
 WHERE n.`spu_id`=#{spuId} order by n.id,v.id
 </select>
 
-<select id="getItemSaleAttrAndValueSku" resultMap="saleList">
-SELECT n.*,v.`sale_attr_value_name`,
-IF(ss.`sale_attr_value_id` IS NULL,'0','1') AS is_check
-FROM `spu_sale_attr` n
-LEFT JOIN `spu_sale_attr_value` v
-ON n.`spu_id`=v.`spu_id` AND n.`base_sale_attr_id`=v.`base_sale_attr_id`
-LEFT JOIN `sku_sale_attr_value` ss
-ON ss.sku_id=#{skuId} AND v.`id`=ss.`sale_attr_value_id`
-WHERE n.spu_id=#{spuId}
-ORDER BY n.`id`,v.`id`
-</select>
+<!--<select id="getItemSaleAttrAndValueSku" resultMap="saleList">-->
+<!--SELECT n.*,v.`sale_attr_value_name`,v.id as vid,-->
+<!--IF(ss.`sale_attr_value_id` IS NULL,'0','1') AS is_check-->
+<!--FROM `spu_sale_attr` n-->
+<!--LEFT JOIN `spu_sale_attr_value` v-->
+<!--ON n.`spu_id`=v.`spu_id` AND n.`base_sale_attr_id`=v.`base_sale_attr_id`-->
+<!--LEFT JOIN `sku_sale_attr_value` ss-->
+<!--ON ss.sku_id=#{skuId} AND v.`id`=ss.`sale_attr_value_id`-->
+<!--WHERE n.spu_id=#{spuId}-->
+<!--ORDER BY n.base_sale_attr_id,v.`id`-->
+<!--</select>-->
+
+    <select id="getItemSaleAttrAndValueSku"
+        resultMap="saleList">
+        select n.*,
+               v.id  vid,
+               v.sale_attr_value_name,
+               IF(ss.sale_attr_value_id  IS NULL,'0','1') as is_check
+        from spu_sale_attr n
+                 left join spu_sale_attr_value v
+                           on n.spu_id = v.spu_id
+                               and n.base_sale_attr_id=v.base_sale_attr_id
+                 left join sku_sale_attr_value ss
+                           on v.id = ss.sale_attr_value_id and ss.sku_id=#{skuId}
+        where n.spu_id=#{spuId}
+        order by n.base_sale_attr_id,v.id
+
+<!--    item:查询出：sku 兄弟的销售属性-->
+
+    </select><select id="getAllSkuValueJson" resultType="com.atguigu.gmall.model.to.ValueSkuJson">
+     select a.sku_id,
+               GROUP_CONCAT(DISTINCT sale_attr_value_id
+                ORDER BY sale_attr_value_id ASC
+                SEPARATOR '|') as value_json
+        from (select si.id sku_id,
+                     skuav.id vid,
+                     skuav.spu_id,
+                     skuav.sale_attr_value_id,
+                     ssav.base_sale_attr_id
+              from sku_info  si
+                       left join sku_sale_attr_value skuav on si.id = skuav.sku_id
+                       left join spu_sale_attr_value ssav on skuav.sale_attr_value_id = ssav.id
+              WHERE si.spu_id=#{spuId} ORDER BY si.id,ssav.base_sale_attr_id,skuav.sale_attr_value_id) a
+        GROUP BY a.sku_id
+
+   </select>
 </mapper>
