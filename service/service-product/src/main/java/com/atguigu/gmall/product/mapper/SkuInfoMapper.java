@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * @author mengxueshong
@@ -14,6 +15,12 @@ import java.math.BigDecimal;
  * @Entity com.atguigu.gmall.product.domain.SkuInfo
  */
 public interface SkuInfoMapper extends BaseMapper<SkuInfo> {
+
+    /**
+     * 3：查询bloom所有需要的商品id
+     * @return
+     */
+    List<Long> getAllSkuId();
     /**
      * 2:下架sku
      *
@@ -29,6 +36,7 @@ public interface SkuInfoMapper extends BaseMapper<SkuInfo> {
     void updateState1(@Param("skuId") Long skuId);
 
     BigDecimal selectPrice(@Param("skuId") Long skuId);
+
 }
 
 

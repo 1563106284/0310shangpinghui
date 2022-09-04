@@ -3,8 +3,6 @@ package com.atguigu.gmall.product.service.impl;
 import com.atguigu.gmall.common.util.Jsons;
 import com.atguigu.gmall.model.product.SpuSaleAttr;
 import com.atguigu.gmall.model.to.ValueSkuJson;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
 import com.atguigu.gmall.product.service.SpuSaleAttrService;

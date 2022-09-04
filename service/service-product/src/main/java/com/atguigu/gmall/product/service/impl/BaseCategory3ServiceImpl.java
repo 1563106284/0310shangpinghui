@@ -2,7 +2,6 @@ package com.atguigu.gmall.product.service.impl;
 
 import com.atguigu.gmall.model.product.BaseCategory3;
 import com.atguigu.gmall.model.to.CategoryViewTo;
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 

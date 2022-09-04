@@ -3,7 +3,6 @@ package com.atguigu.gmall.product.service.impl;
 import com.atguigu.gmall.model.product.BaseAttrInfo;
 import com.atguigu.gmall.model.product.BaseAttrValue;
 import com.atguigu.gmall.product.mapper.BaseAttrValueMapper;
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 

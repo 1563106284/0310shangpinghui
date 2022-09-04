@@ -1,19 +1,19 @@
 package com.atguigu.gmall.product.service.impl;
 
+import com.atguigu.gmall.common.constant.StyRedisConst;
 import com.atguigu.gmall.model.product.*;
 import com.atguigu.gmall.model.to.CategoryViewTo;
 import com.atguigu.gmall.model.to.SkuDetailTo;
 import com.atguigu.gmall.product.mapper.BaseCategory3Mapper;
 import com.atguigu.gmall.product.service.*;
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
 import com.atguigu.gmall.product.mapper.SkuInfoMapper;
+import org.redisson.api.RBloomFilter;
+import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.awt.*;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -39,7 +39,20 @@ public class SkuInfoServiceImpl extends ServiceImpl<SkuInfoMapper, SkuInfo>
     BaseCategory3Mapper baseCategory3Mapper;
        @Autowired
        SpuSaleAttrService spuSaleAttrService;
+       @Autowired
+    RedissonClient   redissonClient;
 
+
+    /**
+     * 8：查询所有布隆需要的商品id
+     * @return
+     */
+    @Override
+    public List<Long> findAllSkuId() {
+        // 如果是大量数据 ：使用分页查询
+
+        return skuInfoMapper.getAllSkuId();
+    }
     /**
      * 7:大接口优化
      *   获取sku 图片
@@ -53,6 +66,8 @@ public class SkuInfoServiceImpl extends ServiceImpl<SkuInfoMapper, SkuInfo>
 
         return images;
     }
+
+
     /**
      * 6；大接口优化：
      * 1：item info信息
@@ -154,6 +169,10 @@ public class SkuInfoServiceImpl extends ServiceImpl<SkuInfoMapper, SkuInfo>
         }
         saleAttrValueService.saveBatch(skuSaleAttrValueList);
 
+        // 5: 商品id 放入到 Bloom过滤器中
+        RBloomFilter<Object> bloomFilter = redissonClient.getBloomFilter(StyRedisConst.BLOOM_SKUID);
+        // 5.1:存进去
+        bloomFilter.add(skuInfo.getId());
     }
 
 
