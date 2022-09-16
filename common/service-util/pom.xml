@@ -48,6 +48,14 @@
             <artifactId>spring-boot-configuration-processor</artifactId>
         </dependency>
 
+
+<!--        引入model-->
+        <dependency>
+            <groupId>com.atguigu.gmall</groupId>
+            <artifactId>model</artifactId>
+            <version>1.0</version>
+        </dependency>
+
     </dependencies>
 
 </project>

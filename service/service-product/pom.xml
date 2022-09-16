@@ -34,9 +34,28 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
+
+
+        </dependency>
+        <dependency>
+            <groupId>com.atguigu.gmall</groupId>
+            <artifactId>gmall-cache-starter</artifactId>
+            <version>1.0</version>
+        </dependency>
+<!--         mysql:读写分离工具： shardingsphere-->
+        <!-- https://mvnrepository.com/artifact/org.apache.shardingsphere/shardingsphere-jdbc-core-spring-boot-starter -->
+        <dependency>
+            <groupId>org.apache.shardingsphere</groupId>
+            <artifactId>shardingsphere-jdbc-core-spring-boot-starter</artifactId>
+            <version>5.1.2</version>
         </dependency>
 
-
+        <dependency>
+            <groupId>com.atguigu.gmall</groupId>
+            <artifactId>feign-client</artifactId>
+            <version>1.0</version>
+        </dependency>
+        
     </dependencies>
     <build>
         <plugins>
@@ -45,6 +64,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
+
     </build>
 
 <!--    打包：-->

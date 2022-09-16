@@ -37,19 +37,59 @@ spring:
           uri: lb://service-product
           predicates:
             - Path=/admin/product/**
-
-#              负载均衡锁的测试配置
-        - id: incr_route
-          uri: lb://service-item
+        - id: cart_router
+          uri: lb://service-cart
           predicates:
-            - Path=/**
-#            -  前端页面
+            - Path=/api/cart/**
+         # 登录页面的路由配置
+        - id: user_route
+          uri: lb://service-user
+          predicates:
+            - Path=/api/user/**
+
+
         - id: web_all_route
-          uri: lb://web_all
+          uri: lb://web-all
           predicates:
-            - Path=/admin/product/**
+            - Host=**.gmall.com
+##          登录页面的异步地址
+#        - id: user_route
+#         - uri: lb://service-user
+#           predicates:
+#             - Path=/api/user/**
 
+## 配置 过滤器过滤请求配置配置
+#app:
+#  auth:
+#    no-auth-url:   #任何无须登录访问的页面
+#      - /css/**
+#      - /js/**
+#      - /img/**
+#
+#    login-auth-url: #登录同意后才能访问的资源
+#      -  /order/**
+#
+#    loginPage: http://passport.gamll.com/login.html
+app:
+  auth:
+    no-auth-url:
+      # 任何人都能访问的路径
+      - /css/**
+      - /js/**
+      - /img/**
+      - /login.html
+      - /api/user/passport/login
 
+    login-auth-url:
+      # 登录后才能访问的资源
+      -  /order/**
+
+    # 重新重定向去的路径
+    login-page: http://passport.gmall.com/login.html
+
+    # 拒绝通过浏览器访问的地址
+    deny-url:
+      - /api/inner/**
 
 
 

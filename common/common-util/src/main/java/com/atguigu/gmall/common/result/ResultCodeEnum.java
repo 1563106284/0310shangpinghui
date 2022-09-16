@@ -28,8 +28,9 @@ public enum ResultCodeEnum {
     SECKILL_ORDER_SUCCESS(218, "下单成功"),
     COUPON_GET(220, "优惠券已经领取"),
     COUPON_LIMIT_GET(221, "优惠券已发放完毕"),
-    ;
-
+    LOGIN_ERROR(2081,"账号密码错误" ),
+    CART_OVERFLOW(3000,"购物车的商品种类超限,请移除部分商品,在添加") ,
+    CART_ITEM_SKUNUM_OVERFLOW(3001,"单个商品不允许超限200,请重新操作") ;
     private Integer code;
 
     private String message;

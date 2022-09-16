@@ -1,5 +1,7 @@
 package com.atguigu.gmall.model.cart;
 
+import com.atguigu.gmall.common.execption.GmallException;
+import com.atguigu.gmall.common.result.ResultCodeEnum;
 import com.atguigu.gmall.model.activity.CouponInfo;
 import com.atguigu.gmall.model.base.BaseEntity;
 import com.baomidou.mybatisplus.annotation.TableField;
@@ -8,7 +10,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.math.BigDecimal;
-import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -31,6 +33,14 @@ public class CartInfo extends BaseEntity {
     @ApiModelProperty(value = "数量")
     @TableField("sku_num")
     private Integer skuNum;
+    //  升级 对购物车页面： 每个商品数量的限制 最大为]0
+
+    public void setSkuNum(Integer skuNum) {
+        if (skuNum > 200){
+            throw new GmallException(ResultCodeEnum.CART_ITEM_SKUNUM_OVERFLOW);
+        }
+        this.skuNum = skuNum;
+    }
 
     @ApiModelProperty(value = "图片文件")
     @TableField("img_url")
@@ -46,11 +56,11 @@ public class CartInfo extends BaseEntity {
 
     //  ,fill = FieldFill.INSERT
     @TableField(value = "create_time")
-    private Timestamp createTime;
+    private Date createTime;
 
     //  ,fill = FieldFill.INSERT_UPDATE)
     @TableField(value = "update_time")
-    private Timestamp updateTime;
+    private Date updateTime;
 
     // 实时价格 skuInfo.price
     @TableField(exist = false)

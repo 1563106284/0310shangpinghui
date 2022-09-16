@@ -1,7 +1,9 @@
 package com.atguigu.gmall.product.service.impl;
 
+import com.atguigu.gmall.common.constant.StyRedisConst;
 import com.atguigu.gmall.model.product.BaseCategory2;
 import com.atguigu.gmall.model.to.CategoryTreeTo;
+import com.atguigu.starter.cache.annotation.GmallCache;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
@@ -33,6 +35,7 @@ public class BaseCategory2ServiceImpl extends ServiceImpl<BaseCategory2Mapper, B
      * 首页需要的树形分类数据
      * @return
      */
+    @GmallCache(cacheKey = StyRedisConst.CACHE_CATEGORYS)
     @Override
     public List<CategoryTreeTo> getAllCategoryWithTree() {
         List<CategoryTreeTo>  list= baseCategory2Mapper.getAllCategoryWithTree();
