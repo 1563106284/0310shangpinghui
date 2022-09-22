@@ -1,5 +1,6 @@
 package com.atguigu.gmall.model.cart;
 
+import com.atguigu.gmall.common.constant.StyRedisConst;
 import com.atguigu.gmall.common.execption.GmallException;
 import com.atguigu.gmall.common.result.ResultCodeEnum;
 import com.atguigu.gmall.model.activity.CouponInfo;
@@ -36,7 +37,7 @@ public class CartInfo extends BaseEntity {
     //  升级 对购物车页面： 每个商品数量的限制 最大为]0
 
     public void setSkuNum(Integer skuNum) {
-        if (skuNum > 200){
+        if (skuNum > StyRedisConst.CART_ITEM_NUM_LIMIT){
             throw new GmallException(ResultCodeEnum.CART_ITEM_SKUNUM_OVERFLOW);
         }
         this.skuNum = skuNum;

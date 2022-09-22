@@ -19,7 +19,10 @@ public class GlobalExceptionHandler {
     @ResponseBody
     public Result error(Exception e){
         e.printStackTrace();
-        return Result.fail();
+        // 1:改造 系统的全局异常 获取到失败的 result.fail
+        Result<Object> result = Result.fail();
+           // 2:  e.异常数据 通过result message方法返回
+        return result.message(e.getMessage());
     }
 
     /**
@@ -30,6 +33,11 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(GmallException.class)
     @ResponseBody
     public Result error(GmallException e){
-        return Result.fail(e.getMessage());
+         // 1:获取 失败：
+        Result<Object> fail = Result.fail();
+        // 2:对fail改造：
+        fail.setCode(e.getCode());
+        fail.setMessage(e.getMessage());
+        return fail;
     }
 }

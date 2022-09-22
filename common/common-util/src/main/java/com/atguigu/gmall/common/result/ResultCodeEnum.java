@@ -30,7 +30,10 @@ public enum ResultCodeEnum {
     COUPON_LIMIT_GET(221, "优惠券已发放完毕"),
     LOGIN_ERROR(2081,"账号密码错误" ),
     CART_OVERFLOW(3000,"购物车的商品种类超限,请移除部分商品,在添加") ,
-    CART_ITEM_SKUNUM_OVERFLOW(3001,"单个商品不允许超限200,请重新操作") ;
+    CART_ITEM_SKUNUM_OVERFLOW(3001,"单个商品不允许超限200,请重新操作"),
+    Token_INVALID(3002,"页面已过期,请重写提交"),
+    ORDER_NO_STOCK(3003,"订单库存不足:"),
+    ORDER_PRICE_CHANGED(3004,"订单中以下商品有价格变化，请刷新重试:");
     private Integer code;
 
     private String message;
@@ -39,4 +42,6 @@ public enum ResultCodeEnum {
         this.code = code;
         this.message = message;
     }
+
+
 }
