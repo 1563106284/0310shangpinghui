@@ -33,7 +33,9 @@ public enum ResultCodeEnum {
     CART_ITEM_SKUNUM_OVERFLOW(3001,"单个商品不允许超限200,请重新操作"),
     Token_INVALID(3002,"页面已过期,请重写提交"),
     ORDER_NO_STOCK(3003,"订单库存不足:"),
-    ORDER_PRICE_CHANGED(3004,"订单中以下商品有价格变化，请刷新重试:");
+    ORDER_PRICE_CHANGED(3004,"订单中以下商品有价格变化，请刷新重试:"),
+    ORDER_EXPIRED(4003,"订单已过期,不能再进行支付");
+
     private Integer code;
 
     private String message;

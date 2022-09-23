@@ -25,7 +25,7 @@ spring:
       routes:
         - id: product_route # 以 /admin/product 开头的所有请求都lb(loadbalancer)转给service-product
           uri: lb://service-product
-          predicates:  #断言
+          predicates: #断言
             - Path=/admin/product/**
 
 
@@ -48,6 +48,12 @@ spring:
           uri: lb://service-order
           predicates:
             - Path=/api/order/**
+            # 支付地址
+        - id: pay_router
+          uri: lb://service-pay
+          predicates:
+            - Path=/api/payment/**
+
 
         - id: web_all_route
           uri: lb://web-all
@@ -58,7 +64,7 @@ spring:
 
 app:
   auth:
-    no-auth-url:  #任意人无需登录都能访问的路径
+    no-auth-url: #任意人无需登录都能访问的路径
       - /css/**
       - /js/**
       - /img/**
